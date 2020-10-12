@@ -9,5 +9,5 @@ echo "$Yellow #####################################################"
 
 while :
 do 
-	curl -X POST -d @req.json ssh fyp@192.168.8.100
+	curl -X POST -d @req.json ssh cirros@10.0.0.106
 done
