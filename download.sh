@@ -11,5 +11,5 @@ echo "$Yellow #####################################################  $Reset"
 
 while :
 do
-	curl -X POST -d @req.json ssh cirros@10.0.0.106
+	curl http://10.0.0.220:80
 done
