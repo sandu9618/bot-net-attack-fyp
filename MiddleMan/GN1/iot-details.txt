@@ -1,0 +1,3 @@
+10.0.0.72 iot-four efgh
+10.0.0.100 iot-two ijkl
+10.0.0.162 iot-one mnop
