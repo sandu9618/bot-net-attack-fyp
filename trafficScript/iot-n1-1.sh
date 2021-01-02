@@ -1,1 +1,1 @@
-echo "pwd" | sudo tcpdump -i any -U -w - | nc 10.0.42.2 12345
+echo "pwd" | sudo tcpdump -i any -U -w - | nc 10.0.0.112 12345
